@@ -66,7 +66,9 @@ jobs:
           repository: ${{ inputs.artifact-repository }}
           run-id: ${{ inputs.artifact-id }}
         continue-on-error: true
-      - run: cp -f artifacts/{playwright.config.ts,global-setup.ts,global-teardown.ts} .
+      - run: cp -f playwright.config.ts global-setup.ts global-teardown.ts ..
+        continue-on-error: true
+        working-directory: artifacts
       - run: npm test ${{ inputs.update-snapshots != 'false' && '-- --update-snapshots' || '' }}
       - run: ls -alR
       - if: ${{ !cancelled() }}
