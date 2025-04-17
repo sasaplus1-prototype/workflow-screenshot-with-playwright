@@ -9,6 +9,7 @@ jobs:
     steps:
       - run: echo "Hello, World!"
   take-screenshots:
-    uses: sasaplus1-prototype/workflow-screenshot-with-playwright/.github/workflows/reusable-take-screenshots.yml@main
+    # uses: sasaplus1-prototype/workflow-screenshot-with-playwright/.github/workflows/reusable-take-screenshots.yml@main
+    uses: ./.github/workflows/reusable-take-screenshots.yml@main
     with:
       update-snapshots: true
