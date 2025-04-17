@@ -28,14 +28,14 @@ jobs:
       - run: npm ci
       - run: npm test ${{ inputs.update-snapshots != 'false' && '-- --update-snapshots' || '' }}
       - run: ls -alR
-      - if: ${{ !cancel() }}
+      - if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-results
           path: |
             playwright-report
             test-results
-      - if: ${{ !cancel() }}
+      - if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-screenshots
