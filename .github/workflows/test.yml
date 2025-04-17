@@ -1,0 +1,14 @@
+name: test
+
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, World!"
+  take-screenshots:
+    uses: sasaplus1-prototype/workflow-screenshot-with-playwright/.github/workflows/reusable-take-screenshots.yml@main
+    with:
+      update-snapshots: true
