@@ -12,4 +12,7 @@ jobs:
     # uses: sasaplus1-prototype/workflow-screenshot-with-playwright/.github/workflows/reusable-take-screenshots.yml@main
     uses: ./.github/workflows/reusable-take-screenshots.yml
     with:
+      urls: |
+        https://example.com
+        https://example.com/2
       update-snapshots: true
