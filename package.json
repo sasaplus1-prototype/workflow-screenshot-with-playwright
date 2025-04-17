@@ -8,6 +8,6 @@
   },
   "private": true,
   "scripts": {
-    "test": "playwright test --project=chromium"
+    "test": "playwright test --project=chromium index.test.ts"
   }
 }

@@ -12,6 +12,28 @@ on:
         required: false
         type: boolean
         default: false
+      artifact-repository:
+        description: 'artifact repository name'
+        required: false
+        type: string
+        default: ''
+      artifact-name:
+        description: 'artifact repository name'
+        required: false
+        type: string
+        default: ''
+      artifact-id:
+        description: 'artifact id'
+        required: false
+        type: string
+        default: ''
+    secrets:
+      github-token:
+        required: true
+    outputs:
+      artifact-id: ${{ steps.upload-playwright-results.outputs.artifact-id }}
+      artifact-url: ${{ steps.upload-playwright-results.outputs.artifact-url }}
+      artifact-digest: ${{ steps.upload-playwright-results.outputs.artifact-digest }}
 
 jobs:
   take-screenshots:
@@ -26,18 +48,24 @@ jobs:
         with:
           node-version-file: package.json
       - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: artifacts
+          github-token: ${{ secrets.github-token }}
+          repository: ${{ inputs.artifact-repository }}
+          run-id: ${{ inputs.artifact-id }}
+        continue-on-error: true
+      - run: cp -f artifacts/{playwright.config.ts,global-setup.ts,global-teardown.ts} .
       - run: npm test ${{ inputs.update-snapshots != 'false' && '-- --update-snapshots' || '' }}
       - run: ls -alR
       - if: ${{ !cancelled() }}
+        id: upload-playwright-results
         uses: actions/upload-artifact@v4
         with:
           name: playwright-results
           path: |
             playwright-report
             test-results
-      - if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-screenshots
-          path: screenshots
+            screenshots
           if-no-files-found: ignore 
