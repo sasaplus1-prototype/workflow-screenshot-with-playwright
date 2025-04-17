@@ -7,7 +7,7 @@ export default defineConfig({
   globalTeardown: require.resolve("./global-teardown"),
   reporter: "html",
   retries: process.env.CI ? 2 : 0,
-  snapshotPathTemplate: '{testDir}/snapshots/{testFilePath}/{arg}{ext}'
+  snapshotPathTemplate: "{testDir}/snapshots/{testFilePath}/{arg}{ext}",
   testDir: ".",
   workers: process.env.CI ? 1 : undefined,
   use: {
