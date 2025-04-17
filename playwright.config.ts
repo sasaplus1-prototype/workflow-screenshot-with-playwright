@@ -10,7 +10,7 @@ export default defineConfig({
   testDir: ".",
   workers: process.env.CI ? 1 : undefined,
   use: {
-    // storageState: "auth.json",
+    storageState: "auth.json",
     trace: "on-first-retry",
   },
   projects: [
