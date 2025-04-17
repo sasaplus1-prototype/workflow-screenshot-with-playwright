@@ -3,5 +3,11 @@
     "@playwright/test": "1.51.1",
     "@types/node": "22.14.1"
   },
-  "private": true
+  "engines": {
+    "node": "22"
+  },
+  "private": true,
+  "scripts": {
+    "test": "playwright test --project=chromium"
+  }
 }
