@@ -31,9 +31,15 @@ on:
       github-token:
         required: true
     outputs:
-      artifact-id: ${{ jobs.take-screenshots.outputs.artifact-id }}
-      artifact-url: ${{ jobs.take-screenshots.outputs.artifact-url }}
-      artifact-digest: ${{ jobs.take-screenshots.outputs.artifact-digest }}
+      artifact-id:
+        description: 'The artifact ID'
+        value: ${{ jobs.take-screenshots.outputs.artifact-id }}
+      artifact-url:
+        description: 'The artifact URL'
+        value: ${{ jobs.take-screenshots.outputs.artifact-url }}
+      artifact-digest:
+        description: 'The artifact digest'
+        value: ${{ jobs.take-screenshots.outputs.artifact-digest }}
 
 jobs:
   take-screenshots:
