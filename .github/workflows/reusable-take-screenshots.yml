@@ -71,7 +71,6 @@ jobs:
         working-directory: artifacts
       - run: npm test ${{ inputs.update-snapshots != 'false' && '-- --update-snapshots' || '' }}
       - run: ls -alR
-        continue-on-error: true
       - if: ${{ !cancelled() }}
         id: upload-playwright-results
         uses: actions/upload-artifact@v4
@@ -79,6 +78,6 @@ jobs:
           name: playwright-results
           path: |
             playwright-report
+            snapshots
             test-results
-            screenshots
           if-no-files-found: ignore 
