@@ -31,15 +31,19 @@ on:
       github-token:
         required: true
     outputs:
-      artifact-id: ${{ steps.upload-playwright-results.outputs.artifact-id }}
-      artifact-url: ${{ steps.upload-playwright-results.outputs.artifact-url }}
-      artifact-digest: ${{ steps.upload-playwright-results.outputs.artifact-digest }}
+      artifact-id: ${{ steps.take-screenshots.outputs.artifact-id }}
+      artifact-url: ${{ steps.take-screenshots.outputs.artifact-url }}
+      artifact-digest: ${{ steps.take-screenshots.outputs.artifact-digest }}
 
 jobs:
   take-screenshots:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright@sha256:146d046a8d79a1b3a87596c4457b0b1c47f811bf4fc2cc1b99e873ae7f1cbbbd # v1.51.1-noble
+    outputs:
+      artifact-id: ${{ steps.upload-playwright-results.outputs.artifact-id }}
+      artifact-url: ${{ steps.upload-playwright-results.outputs.artifact-url }}
+      artifact-digest: ${{ steps.upload-playwright-results.outputs.artifact-digest }}
     steps:
       - uses: actions/checkout@v4
         with:
